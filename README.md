@@ -23,7 +23,7 @@ A web-based car rental system developed using Django.
 
 Clone the repository:
 
-git clone https://github.com/username/project-name.git
+git clone [https://github.com/username/project-name.git](https://github.com/VrajDhaduk/Car-Price-Prediction.git)
 
 Install requirements:
 
