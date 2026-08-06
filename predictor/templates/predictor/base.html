@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Car Price Predictor — XGBoost ML Project{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'predictor/css/Style.css' %}">
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<nav>
+  <div class="logo"><span class="logo-mark"></span> Vraj Dhaduk<span class="mono" style="color:var(--dim); font-weight:400; margin-left:4px;">/ car-price-ml</span></div>
+  <ul class="nav-links" role="tablist">
+    <li><a href="{% url 'home' %}" class="{% if active == 'home' %}active{% endif %}">Home</a></li>
+    <li><a href="{% url 'demo' %}" class="{% if active == 'demo' %}active{% endif %}">Live Demo</a></li>
+    <li><a href="{% url 'insights' %}" class="{% if active == 'insights' %}active{% endif %}">Model Insights</a></li>
+    <li><a href="{% url 'stack' %}" class="{% if active == 'stack' %}active{% endif %}">Tech Stack</a></li>
+    <li><a href="{% url 'about' %}" class="{% if active == 'about' %}active{% endif %}">About</a></li>
+  </ul>
+</nav>
+
+{% block content %}{% endblock %}
+
+<footer>
+  © 2026 Priya Sharma, Bengaluru — Car Price Prediction for the Indian Market (XGBoost). Built for portfolio &amp; interview walkthroughs.
+</footer>
+
+<script src="{% static 'predictor/js/Script.js' %}"></script>
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>

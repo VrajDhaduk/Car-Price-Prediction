@@ -1,0 +1,40 @@
+{% extends "predictor/base.html" %}
+{% block content %}
+<section class="page" id="page-insights">
+<div class="wrap page-head">
+    <h2 class="section-title">Under the hood</h2>
+    <p class="section-sub">What the model actually learned to weigh, how it stacks up against simpler baselines, and how close predictions land to real sale prices.</p>
+  </div>
+  <div class="wrap insight-grid">
+    <div class="card">
+      <h3>Feature importance</h3>
+      <div id="bars"></div>
+    </div>
+    <div class="card">
+      <h3>Model comparison</h3>
+      <table>
+        <thead><tr><th>Model</th><th>R²</th><th>MAE</th></tr></thead>
+        <tbody>
+          <tr><td>Linear Regression</td><td class="mono">0.81</td><td class="mono">₹1,28,000</td></tr>
+          <tr><td>Random Forest</td><td class="mono">0.90</td><td class="mono">₹84,000</td></tr>
+          <tr><td>XGBoost <span class="pill">selected</span></td><td class="mono model-best">0.94</td><td class="mono model-best">₹68,000</td></tr>
+        </tbody>
+      </table>
+      <h3 style="margin-top:30px;">Hyperparameters (tuned)</h3>
+      <table>
+        <tbody>
+          <tr><td>n_estimators</td><td class="mono">450</td></tr>
+          <tr><td>max_depth</td><td class="mono">6</td></tr>
+          <tr><td>learning_rate</td><td class="mono">0.05</td></tr>
+          <tr><td>subsample</td><td class="mono">0.8</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="wrap" style="padding-bottom:80px;">
+    <div class="card">
+      <h3>Predicted vs. actual sale price</h3>
+      <svg id="scatter-svg" viewBox="0 0 700 320"></svg>
+    </div>
+  </div></section>
+{% endblock %}

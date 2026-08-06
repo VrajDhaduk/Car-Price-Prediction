@@ -1,0 +1,103 @@
+{% extends "predictor/base.html" %}
+{% block content %}
+<section class="page" id="page-demo">
+<div class="wrap page-head">
+    <h2 class="section-title">Get a live price estimate</h2>
+    <p class="section-sub">Fill in a car's details below. This calls the real trained XGBoost model on the server — the gauge sweeps to its actual predicted resale price.</p>
+  </div>
+  <div class="wrap demo-grid">
+    <div class="form-card">
+      {% csrf_token %}
+      <div class="field-row">
+        <div class="field">
+          <label for="brand">Brand</label>
+          <select id="brand"></select>
+        </div>
+        <div class="field">
+          <label for="model">Model</label>
+          <select id="model"></select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="year">Year of manufacture</label>
+          <select id="year"></select>
+        </div>
+        <div class="field">
+          <label for="city">City</label>
+          <select id="city">
+            <option>Ahmedabad</option>
+            <option>Bangalore</option>
+            <option>Chennai</option>
+            <option>Delhi</option>
+            <option>Hyderabad</option>
+            <option>Jaipur</option>
+            <option>Kolkata</option>
+            <option>Mumbai</option>
+            <option>Pune</option>
+            <option>Surat</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="mileage">Odometer reading (km)</label>
+        <input type="number" id="mileage" min="0" max="500000" step="500" value="45000" placeholder="e.g. 45000">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="fuel">Fuel type</label>
+          <select id="fuel">
+            <option>CNG</option>
+            <option>Diesel</option>
+            <option>Hybrid</option>
+            <option selected>Petrol</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="trans">Transmission</label>
+          <select id="trans">
+            <option selected>Manual</option>
+            <option>Automatic</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="owner">Ownership</label>
+        <select id="owner">
+          <option selected>First Owner</option>
+          <option>Second Owner</option>
+          <option>Third Owner</option>
+        </select>
+      </div>
+      <button class="btn btn-primary predict-btn" onclick="runPrediction()">Predict price</button>
+      <div class="demo-note" id="predict-error" style="display:none; color:var(--maroon);"></div>
+      <div class="demo-note">This form posts to <span class="mono">/predict/</span>, which loads <span class="mono">car_price_model.pkl</span> plus the six label encoders and returns a real prediction — not a placeholder formula.</div>
+    </div>
+
+    <div class="gauge-wrap">
+      <div class="gauge-card">
+        <div class="title">Predicted resale price</div>
+        <svg id="demo-gauge" viewBox="0 0 300 180">
+          <path d="M 30 160 A 120 120 0 0 1 270 160" stroke="#2B1B14" stroke-width="18" fill="none" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="gaugeGrad2" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#2F9C8A"/>
+              <stop offset="100%" stop-color="#E8A33D"/>
+            </linearGradient>
+          </defs>
+          <path d="M 30 160 A 120 120 0 0 1 270 160" stroke="url(#gaugeGrad2)" stroke-width="18" fill="none" stroke-linecap="round" stroke-dasharray="377" stroke-dashoffset="377" id="demo-gauge-fill"/>
+          <line class="gauge-needle" id="demo-needle" x1="150" y1="160" x2="150" y2="55" stroke="#F4EAE0" stroke-width="3" transform="rotate(-90 150 160)"/>
+          <circle cx="150" cy="160" r="7" fill="#F4EAE0"/>
+        </svg>
+        <div class="gauge-readout">
+          <div class="val mono" id="demo-price">₹ —</div>
+          <div class="sub">estimated market value</div>
+        </div>
+        <div class="confidence-band">
+          <span id="band-low">low: —</span>
+          <span id="band-high">high: —</span>
+        </div>
+      </div>
+    </div>
+  </div></section>
+{% endblock %}

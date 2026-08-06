@@ -1,0 +1,31 @@
+{% extends "predictor/base.html" %}
+{% block content %}
+<section class="page" id="page-stack">
+<div class="wrap page-head">
+    <h2 class="section-title">How it's built</h2>
+    <p class="section-sub">Every layer of the pipeline, from raw CSV to the page you're looking at.</p>
+  </div>
+  <div class="wrap stack-grid">
+    <div class="stack-item"><div class="ic">py</div><div class="nm">Python</div><div class="role">Core pipeline</div></div>
+    <div class="stack-item"><div class="ic">pd</div><div class="nm">Pandas</div><div class="role">Data cleaning</div></div>
+    <div class="stack-item"><div class="ic">xgb</div><div class="nm">XGBoost</div><div class="role">Regression model</div></div>
+    <div class="stack-item"><div class="ic">skl</div><div class="nm">scikit-learn</div><div class="role">CV &amp; metrics</div></div>
+    <div class="stack-item"><div class="ic">api</div><div class="nm">FastAPI</div><div class="role">Model serving</div></div>
+    <div class="stack-item"><div class="ic">js</div><div class="nm">HTML/CSS/JS</div><div class="role">This frontend</div></div>
+  </div>
+  <div class="wrap">
+    <h3 style="margin-bottom:6px;">Architecture</h3>
+    <p class="section-sub" style="margin-bottom:0;">Request flow from a visitor's form submission to a served prediction.</p>
+    <div class="arch-diagram">
+      <div class="arch-node"><div class="k">Client</div><div class="v">This website</div></div>
+      <div class="arch-conn"></div>
+      <div class="arch-node"><div class="k">Request</div><div class="v">POST /predict</div></div>
+      <div class="arch-conn"></div>
+      <div class="arch-node"><div class="k">API</div><div class="v">FastAPI service</div></div>
+      <div class="arch-conn"></div>
+      <div class="arch-node"><div class="k">Model</div><div class="v">XGBoost (.pkl)</div></div>
+      <div class="arch-conn"></div>
+      <div class="arch-node"><div class="k">Response</div><div class="v">Predicted price</div></div>
+    </div>
+  </div></section>
+{% endblock %}

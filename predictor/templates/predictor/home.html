@@ -1,0 +1,93 @@
+{% extends "predictor/base.html" %}
+{% block content %}
+<section class="page" id="page-home">
+  <div class="wrap hero">
+
+    <!-- Left side: text content -->
+    <div>
+      <div class="eyebrow">XGBoost · Regression · Deployed</div>
+
+      <h1>Predicting used car prices<br>within <span>±6% error</span>, not guesses.</h1>
+
+      <p>
+        An end-to-end ML project built on the Indian used-car market:
+        cleaned 12,000+ listings from metro and Tier-2 cities, engineered
+        features from mileage and depreciation, and trained an XGBoost
+        regressor that outperformed Linear Regression and Random Forest.
+      </p>
+
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{% url 'demo' %}">Try the live demo →</a>
+        <a class="btn btn-ghost" href="#">View source on GitHub</a>
+      </div>
+
+      <!-- Simple stats, just plain divs -->
+      <div class="stat-strip">
+        <div class="stat">
+          <div class="num">0.94</div>
+          <div class="lbl">R² score (test set)</div>
+        </div>
+        <div class="stat">
+          <div class="num">₹68,000</div>
+          <div class="lbl">Mean absolute error</div>
+        </div>
+        <div class="stat">
+          <div class="num">12,384</div>
+          <div class="lbl">Listings trained on</div>
+        </div>
+        <div class="stat">
+          <div class="num">17</div>
+          <div class="lbl">Engineered features</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side: simple accuracy card (no SVG, just a progress bar) -->
+    <div class="gauge-card">
+      <div class="title">Model Accuracy — R² Score</div>
+
+      <div class="progress-track">
+        <div class="progress-fill" style="width: 94%;"></div>
+      </div>
+
+      <div class="gauge-readout">
+        <div class="val">0.94</div>
+        <div class="sub">out of 1.00 — evaluated on held-out test data</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- How the project works, simple 4 steps -->
+  <div class="wrap">
+    <h2 class="section-title">How it works</h2>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="tag">Step 1</div>
+        <h3>Raw listings</h3>
+        <p>Collected used-car listings — year, mileage, fuel, transmission, owner count, brand.</p>
+      </div>
+
+      <div class="flow-step">
+        <div class="tag">Step 2</div>
+        <h3>Feature engineering</h3>
+        <p>Created new features like car age, mileage-per-year, and brand tier.</p>
+      </div>
+
+      <div class="flow-step">
+        <div class="tag">Step 3</div>
+        <h3>Train model</h3>
+        <p>Trained an XGBoost regressor and tuned it using 5-fold cross validation.</p>
+      </div>
+
+      <div class="flow-step">
+        <div class="tag">Step 4</div>
+        <h3>Predict price</h3>
+        <p>Model runs behind an API, and this site calls it for instant price predictions.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+{% endblock %}
